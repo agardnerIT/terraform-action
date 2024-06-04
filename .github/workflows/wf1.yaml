@@ -24,14 +24,16 @@ jobs:
         run: mv terraform-provider-dynatrace_v${{env.DT_VERSION}} terraform-provider-dynatrace
       
       - name: "Run Binary"
-        run: "echo \"DYNATRACE_ENV_URL = ${{ secrets.DYNATRACE_ENV_URL }}\""
-        # env:
+        run: "echo \"DT_CONFIG_TYPES: ${{ env.DT_CONFIG_TYPES }}\""
+        # run: "echo \"DYNATRACE_ENV_URL = ${{ secrets.DYNATRACE_ENV_URL }}\""
+        env:
         #   DT_CONFIG_TYPES: ""
-        #   DYNATRACE_ENV_URL: ${{ secrets.DYNATRACE_ENV_URL }}
-        #   DYNATRACE_API_TOKEN: ${{ secrets.DYNATRACE_API_TOKEN }}
-        #   DYNATRACE_AUTOMATION_CLIENT_ID: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_ID }}
-        #   DYNATRACE_AUTOMATION_CLIENT_SECRET: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_SECRET }}
+          DYNATRACE_ENV_URL: ${{ secrets.DYNATRACE_ENV_URL }}
+          DYNATRACE_API_TOKEN: ${{ secrets.DYNATRACE_API_TOKEN }}
+          DYNATRACE_AUTOMATION_CLIENT_ID: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_ID }}
+          DYNATRACE_AUTOMATION_CLIENT_SECRET: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_SECRET }}
         # run: "DYNATRACE_ENV_URL=\"${{ secrets.DYNATRACE_ENV_URL }}\" DYNATRACE_API_TOKEN=\"${{ secrets.DYNATRACE_API_TOKEN }}\" DYNATRACE_AUTOMATION_CLIENT_ID=\"${{ secrets.DYNATRACE_AUTOMATION_CLIENT_ID }}\" DYNATRACE_AUTOMATION_CLIENT_SECRET=\"${{ secrets.DYNATRACE_AUTOMATION_CLIENT_SECRET }}\" ./terraform-provider-dynatrace -export ${{env.DT_CONFIG_TYPES}}"
+        # run: "./terraform-provider-dynatrace -export ${{env.DT_CONFIG_TYPES}}"
 
       - name: "List files and folders"
         run: "ls -al"
