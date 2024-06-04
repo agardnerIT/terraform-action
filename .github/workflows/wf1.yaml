@@ -50,10 +50,8 @@ jobs:
       
       - name: "Generate times and event UUID"
         run: >
-            endTime=$(date +%s) &&
-            export $endTime &&
+            endTime=$(date +%s)
             timeDiff=$(($endTime - $startTime)) &&
-            export $timeDiff &&
             eventUUID=$(uuidgen)
 
       - name: "Send bizevent"
