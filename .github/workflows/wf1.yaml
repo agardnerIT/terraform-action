@@ -5,15 +5,19 @@ env:
   DT_ADDITIONAL_CONFIG_TYPES: "dynatrace_document" # Optional. Seperate multiple with space. Eg. "dynatrace_document dynatrace_type_2"
   DYNATRACE_TARGET_FOLDER: "exported_configuration"
   DYNATRACE_ENV_URL: ${{ secrets.DYNATRACE_ENV_URL }}
-  DYNATRACE_API_TOKEN: ${{ secrets.DYNATRACE_API_TOKEN }}
-  DYNATRACE_AUTOMATION_CLIENT_ID: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_ID }}
-  DYNATRACE_AUTOMATION_CLIENT_SECRET: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_SECRET }}
+  DYNATRACE_API_TOKEN: ${{ secrets.DYNATRACE_API_TOKEN }} # This needs to be set so the binary picks them up automatically
+  DYNATRACE_AUTOMATION_CLIENT_ID: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_ID }} # This needs to be set so the binary picks them up automatically
+  DYNATRACE_AUTOMATION_CLIENT_SECRET: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_SECRET }} # This needs to be set so the binary picks them up automatically
+  DT_BUSINESS_EVENT_TOKEN: ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}
 
 jobs:
   Export-Configuration:
     environment: DUMMY
     runs-on: ubuntu-latest
     steps:
+      - name: "Note start time"
+        run: "export startTime=$(date +%s)"
+
       - name: Check out repository code
         uses: actions/checkout@v4
       
@@ -35,11 +39,33 @@ jobs:
         if: env.DT_ADDITIONAL_CONFIG_TYPES != '' # Run only if additional configs are specified. Note: Your tokens and oAuth need to the correct permissions!
         run: "./terraform-provider-dynatrace -export -skip-terraform-init=True ${{env.DT_ADDITIONAL_CONFIG_TYPES}}"
 
-      - name: "List files and folders"
-        run: "ls -al"
-
       - name: "Configure Git"
         run: "git config --local user.name 'gha_bot' && git config --local user.email 'gha_bot@nowhere.com'"
 
       - name: "Commit files to repo"
         run: "git add ${{ env.DYNATRACE_TARGET_FOLDER }}/* && git commit -m 'update backup' && git push"
+      
+      - name: "Note end time"
+        run: "export endTime=$(date +%s)"
+        #run: "echo $(date +%s) >> /tmp/timings"
+      
+      - name: Calculate Duration
+        run: "let \"timeDiff = $endTime - $startTime\" && export timeDiff"
+      
+      - name: Send Business Event to Dynatrace
+        run: >
+            eventUUID=$(uuidgen)
+            curl -X POST ${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest' \
+              -H "accept: application/json; charset=utf-8" \
+              -H "Authorization: Api-Token ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}" \
+              -H "Content-Type: application/cloudevent+json" \
+              -d "{
+                    "specversion": "1.0",
+                    "id": $eventUUID,
+                    "source": "actions.github",
+                    "type": "com.mycompany.dynatrace.backup",
+                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
+                    "data": {
+                        "duration": $timeDiff
+                    }
+                  }"
