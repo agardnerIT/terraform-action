@@ -69,13 +69,13 @@ jobs:
               -H "Authorization: Api-Token redacted" \
               -H "Content-Type: application/cloudevent+json" \
               -d "{ \
-                    "specversion": "1.0", \
-                    "id": "$local_bizevent_uuid", \
-                    "source": "github.actions", \
-                    "type": "com.mycompany.dynatrace.configuration.backup", \
-                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0", \
-                    "data": { \
-                        "duration": "$local_time_diff" \
+                    \"specversion\": \"1.0\", \
+                    \"id\": \"$local_bizevent_uuid\", \
+                    \"source\": \"github.actions\", \
+                    \"type": \"com.mycompany.dynatrace.configuration.backup\", \
+                    \"dataschema\": \"http://dynatrace.com/schema/bizevents/generic/1.0\", \
+                    \"data\": { \
+                        \"duration\": $local_time_diff \
                     } \
                   }"
       
