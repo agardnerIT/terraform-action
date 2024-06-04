@@ -51,7 +51,7 @@ jobs:
       - name: "Send bizevent"
         run: >
             endTime=$(date +%s)" &&
-            let "timeDiff = $endTime - $startTime" &&
+            timeDiff=$(($endTime - $startTime)) &&
             eventUUID=$(uuidgen) &&
             curl -X POST ${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest' \
               -H "accept: application/json; charset=utf-8" \
