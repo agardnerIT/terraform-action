@@ -62,16 +62,21 @@ jobs:
       - name: "Print env"
         run: >
             printenv
-
-      - name: "Generate times and event UUID"
+      
+      - name: "Temp: Set end time"
         run: >
             endTime=$(date +%s) &&
+            echo "GHA_END_TIME=$endTime" >> "$GITHUB_ENV"
+      
+      - name: "Temp: Set start time"
+        run: >
             startTime=$(($endTime - 4)) &&
-            echo "GHA_START_TIME=$startTime" >> "$GITHUB_ENV" &&
-            echo "GHA_END_TIME=$endTime" >> "$GITHUB_ENV" &&
+            echo "GHA_START_TIME=$startTime" >> "$GITHUB_ENV"
+
+      - name: "Generate time diff and event UUID"
+        run: >
             timeDiff=$(($GHA_END_TIME - $GHA_START_TIME)) &&
-            echo "GHA_TIME_DIFF=$timeDiff" &&
-            eventUUID=$(uuidgen)
+            echo "GHA_TIME_DIFF=$timeDiff" >> "$GITHUB_ENV"
 
       - name: "Send bizevent"
         run: >
