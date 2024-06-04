@@ -44,15 +44,15 @@ jobs:
 
       - name: "Commit files to repo"
         run: >
-            git add ${{ env.DYNATRACE_TARGET_FOLDER }}/*
-            git diff-index --quiet HEAD || git commit -m 'update backup'
+            git add ${{ env.DYNATRACE_TARGET_FOLDER }}/* &&
+            git diff-index --quiet HEAD || git commit -m 'update backup' &&
             git push
       
       - name: "Send bizevent"
         run: >
-            endTime=$(date +%s)"
-            let "timeDiff = $endTime - $startTime"
-            eventUUID=$(uuidgen)
+            endTime=$(date +%s)" &&
+            let "timeDiff = $endTime - $startTime" &&
+            eventUUID=$(uuidgen) &&
             curl -X POST ${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest' \
               -H "accept: application/json; charset=utf-8" \
               -H "Authorization: Api-Token ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}" \
