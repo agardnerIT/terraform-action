@@ -78,6 +78,7 @@ jobs:
                         \"duration\": $local_time_diff, \
                         \"Link to Action\": \"https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\",
                         \"GITHUB_TRIGGERING_ACTOR\": \"$GITHUB_TRIGGERING_ACTOR\",
-                        \"Default config backup\": \"${{ env.DO_STANDARD_EXPORT }}\" \
+                        \"Default config backup\": \"${{ env.DO_STANDARD_EXPORT }}\", \
+                        \"Custom config items\": \"${{ env.DT_ADDITIONAL_CONFIG_TYPES }}\" \
                     } \
                   }"
