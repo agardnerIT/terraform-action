@@ -67,7 +67,7 @@ jobs:
         run: >
             endTime=$(date +%s) &&
             echo "GHA_END_TIME=$endTime" >> "$GITHUB_ENV"
-            timeDiff=$(($gha_end_time - $gha_start_time)) &&
+            timeDiff=$(($GHA_END_TIME - $GHA_START_TIME)) &&
             echo "GHA_TIME_DIFF=$timeDiff"
       #       eventUUID=$(uuidgen)
 
@@ -84,7 +84,7 @@ jobs:
                     "type": "com.mycompany.dynatrace.configuration.backup", \
                     "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0", \
                     "data": { \
-                        "duration": $gha_time_diff \
+                        "duration": $GHA_TIME_DIFF \
                     } \
                   }"
       
