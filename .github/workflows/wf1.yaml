@@ -83,6 +83,6 @@ jobs:
                         \"GITHUB_JOB\": \"$GITHUB_JOB\", \
                         \"GITHUB_REPOSITORY\": \"$GITHUB_REPOSITORY\", \
                         \"GITHUB_WORKFLOW\": \"$GITHUB_WORKFLOW\", \
-                        \"Action trigger\": \"$GITHUB_EVENT_NAME\"
+                        \"Action trigger\": \"$GITHUB_EVENT_NAME\" \
                     } \
                   }"
