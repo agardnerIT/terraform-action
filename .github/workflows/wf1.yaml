@@ -2,7 +2,11 @@ name: Run Terraform
 on: workflow_dispatch
 env:
   DT_VERSION: "1.58.0"
-  DT_CONFIG_TYPES: "dynatrace_dashboard"
+  DT_ADDITIONAL_CONFIG_TYPES: "dynatrace_dashboard" # Optional
+  DYNATRACE_ENV_URL: ${{ secrets.DYNATRACE_ENV_URL }}
+  DYNATRACE_API_TOKEN: ${{ secrets.DYNATRACE_API_TOKEN }}
+  DYNATRACE_AUTOMATION_CLIENT_ID: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_ID }}
+  DYNATRACE_AUTOMATION_CLIENT_SECRET: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_SECRET }}
 
 jobs:
   Export-Configuration:
@@ -23,14 +27,11 @@ jobs:
           DT_VERSION: "1.58.0"
         run: mv terraform-provider-dynatrace_v${{env.DT_VERSION}} terraform-provider-dynatrace
       
-      - name: "Run Binary"
-        # run: "echo \"DYNATRACE_ENV_URL = ${{ secrets.DYNATRACE_ENV_URL }}\""
-        env:
-          DYNATRACE_ENV_URL: ${{ secrets.DYNATRACE_ENV_URL }}
-          DYNATRACE_API_TOKEN: ${{ secrets.DYNATRACE_API_TOKEN }}
-          DYNATRACE_AUTOMATION_CLIENT_ID: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_ID }}
-          DYNATRACE_AUTOMATION_CLIENT_SECRET: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_SECRET }}
-        run: "./terraform-provider-dynatrace -skip-terraform-init -export ${{env.DT_CONFIG_TYPES}}"
+      - name: "Bulk Export"
+        run: "./terraform-provider-dynatrace -skip-terraform-init true -export"
+      
+      - name: "Export non-default items"
+        run: "./terraform-provider-dynatrace -skip-terraform-init true -export ${{env.DT_ADDITIONAL_CONFIG_TYPES}}"
 
       - name: "List files and folders"
         run: "ls -al"
