@@ -2,7 +2,7 @@ name: Run Terraform
 on: workflow_dispatch
 env:
   DT_VERSION: "1.58.0"
-  DT_ADDITIONAL_CONFIG_TYPES: "dynatrace_dashboard" # Optional. Seperate multiple with space. Eg. "dynatrace_dashboard dynatrace_type_2"
+  DT_ADDITIONAL_CONFIG_TYPES: "dynatrace_document" # Optional. Seperate multiple with space. Eg. "dynatrace_document dynatrace_type_2"
   DYNATRACE_TARGET_FOLDER: "exported_configuration"
   DYNATRACE_ENV_URL: ${{ secrets.DYNATRACE_ENV_URL }}
   DYNATRACE_API_TOKEN: ${{ secrets.DYNATRACE_API_TOKEN }}
@@ -33,7 +33,7 @@ jobs:
       
       - name: "Export non-default items"
         if: env.DT_ADDITIONAL_CONFIG_TYPES != '' # Run only if additional configs are specified. Note: Your tokens and oAuth need to the correct permissions!
-        run: "./terraform-provider-dynatrace -export -ref ${{env.DT_ADDITIONAL_CONFIG_TYPES}}"
+        run: "./terraform-provider-dynatrace -export -ref \"${{env.DT_ADDITIONAL_CONFIG_TYPES}}\""
 
       - name: "List files and folders"
         run: "ls -al"
