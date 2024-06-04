@@ -1,0 +1,31 @@
+name: Run Terraform
+on: workflow_dispatch
+env:
+  DT_VERSION: "1.58.0"
+  DT_CONFIG_TYPES: ""
+
+jobs:
+  Export-Configuration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      
+      - name: "Get Binary"
+        run: wget https://github.com/dynatrace-oss/terraform-provider-dynatrace/releases/download/v${{env.DT_VERSION}}/terraform-provider-dynatrace_${{env.DT_VERSION}}_linux_amd64.zip
+      
+      - name: "Unzip Binary"
+        run: unzip terraform-provider-dynatrace_${{env.DT_VERSION}}_linux_amd64.zip
+      
+      - name: "Rename Binary"
+        env:
+          DT_VERSION: "1.58.0"
+        run: mv terraform-provider-dynatrace_v${{env.DT_VERSION}} terraform-provider-dynatrace
+      
+      - name: "Run Binary"
+        env:
+          DT_CONFIG_TYPES: ""
+        run: "./terraform-provider-dynatrace -export ${{env.DT_CONFIG_TYPES}}"
+
+      - name: "List files and folders"
+        run: "ls -al"
