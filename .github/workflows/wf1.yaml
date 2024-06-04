@@ -64,9 +64,9 @@ jobs:
             endTime=$(date +%s) &&
             local_time_diff=$(($endTime - $GHA_START_TIME)) &&
             local_bizevent_uuid=$(uuidgen) &&
-            curl -X POST "https://webhook.site/fd43f265-6b70-4963-86a5-918d6a2c5db7" \
+            curl -X POST "${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest" \
               -H "accept: application/json; charset=utf-8" \
-              -H "Authorization: Api-Token redacted" \
+              -H "Authorization: Api-Token ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}" \
               -H "Content-Type: application/cloudevent+json" \
               -d "{ \
                     \"specversion\": \"1.0\", \
