@@ -61,27 +61,23 @@ jobs:
 
       - name: "Send bizevent"
         run: >
-            echo "GHA_END_TIME=$(date +%s)" >> "$GITHUB_ENV" &&
-            echo "GHA_TIME_DIFF=$(($GHA_END_TIME - $GHA_START_TIME))" >> "$GITHUB_ENV" &&
-            local_gha_time_diff=$(($GHA_END_TIME - $GHA_START_TIME)) &&
+            endTime=$(date +%s) &&
+            local_time_diff=$(($endTime - $GHA_START_TIME)) &&
             echo "local_gha_time_diff: $local_gha_time_diff" &&
-            echo "Time difference is: $GHA_TIME_DIFF" &&
             local_bizevent_uuid=$(uuidgen) &&
             echo "local_bizevent_uuid is: $local_bizevent_uuid" &&
-            echo "BIZEVENT_UUID=$(uuidgen)" >> "$GITHUB_ENV" &&
-            echo "BIZEVENT_UUID is: $BIZEVENT_UUID" &&
             curl -X POST "https://webhook.site/fd43f265-6b70-4963-86a5-918d6a2c5db7" \
               -H "accept: application/json; charset=utf-8" \
               -H "Authorization: Api-Token blah" \
               -H "Content-Type: application/cloudevent+json" \
               -d "{ \
                     "specversion": "1.0", \
-                    "id": "$BIZEVENT_UUID", \
+                    "id": "$local_bizevent_uuid", \
                     "source": "github.actions", \
                     "type": "com.mycompany.dynatrace.configuration.backup", \
                     "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0", \
                     "data": { \
-                        "duration": "$GHA_TIME_DIFF" \
+                        "duration": "$local_time_diff" \
                     } \
                   }"
       
