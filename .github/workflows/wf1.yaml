@@ -50,22 +50,22 @@ jobs:
       
       - name: "Send bizevent"
         run: >
-            endTime=$(date +%s)" &&
+            endTime=$(date +%s) &&
             timeDiff=$(($endTime - $startTime)) &&
             eventUUID=$(uuidgen) &&
             curl -X POST "${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest" \
               -H "accept: application/json; charset=utf-8" \
               -H "Authorization: Api-Token ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}" \
               -H "Content-Type: application/cloudevent+json" \
-              -d "{
-                    "specversion": "1.0",
-                    "id": "$eventUUID",
-                    "source": "github.actions",
-                    "type": "com.mycompany.dynatrace.configuration.backup",
-                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
-                    "data": {
-                        "duration": $timeDiff
-                    }
+              -d "{ \
+                    "specversion": "1.0", \
+                    "id": "$eventUUID", \
+                    "source": "github.actions", \
+                    "type": "com.mycompany.dynatrace.configuration.backup", \
+                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0", \
+                    "data": { \
+                        "duration": $timeDiff \
+                    } \
                   }"
       
       # - name: Calculate Duration
