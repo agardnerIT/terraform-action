@@ -2,7 +2,8 @@ name: Run Terraform
 on: workflow_dispatch
 env:
   DT_VERSION: "1.58.0"
-  DT_ADDITIONAL_CONFIG_TYPES: "dynatrace_dashboard" # Optional
+  DT_ADDITIONAL_CONFIG_TYPES: "dynatrace_dashboard" # Optional. Seperate multiple with space. Eg. "dynatrace_dashboard dynatrace_type_2"
+  DYNATRACE_TARGET_FOLDER: "exported_configuration"
   DYNATRACE_ENV_URL: ${{ secrets.DYNATRACE_ENV_URL }}
   DYNATRACE_API_TOKEN: ${{ secrets.DYNATRACE_API_TOKEN }}
   DYNATRACE_AUTOMATION_CLIENT_ID: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_ID }}
@@ -31,10 +32,20 @@ jobs:
         run: "./terraform-provider-dynatrace -export -skip-terraform-init terraform init"
       
       - name: "Export non-default items"
+        if: env.DT_ADDITIONAL_CONFIG_TYPES != '' # Run only if additional configs are specified. Note: Your tokens and oAuth need to the correct permissions!
         run: "./terraform-provider-dynatrace -export -ref ${{env.DT_ADDITIONAL_CONFIG_TYPES}}"
 
       - name: "List files and folders"
         run: "ls -al"
       
+      - name: switching from HTTPS to SSH
+        run: git remote set-url origin ${{ secrets.ssh }}
+      
+      - name: fetch from main
+        run: git fetch origin main
+
+      - name: push code to master
+        run: git push origin HEAD:main
+
       - name: "Commit files to repo"
-        run: "git add configuration/* && git commit -m 'update backup' && git push"
+        run: "git add ${{ env.DYNATRACE_TARGET_FOLDER }}/* && git commit -m 'update backup' && git push"
