@@ -56,7 +56,7 @@ resource "dynatrace_document" "Untitled_notebook" {
             },
             "result": {
               "code": 200,
-              "dateTime": "2024-06-04T05:30:19.776Z",
+              "dateTime": "2024-06-04T05:33:21.054Z",
               "input": {
                 "timeframe": {
                   "details": {
@@ -81,24 +81,36 @@ resource "dynatrace_document" "Untitled_notebook" {
                 "metadata": {
                   "grail": {
                     "analysisTimeframe": {
-                      "end": "2024-06-04T05:30:19.778Z",
-                      "start": "2024-06-04T05:00:19.778Z"
+                      "end": "2024-06-04T05:33:21.055Z",
+                      "start": "2024-06-04T05:03:21.055Z"
                     },
                     "canonicalQuery": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"",
                     "dqlVersion": "V1_0",
-                    "executionTimeMilliseconds": 22,
+                    "executionTimeMilliseconds": 31,
                     "locale": "und",
                     "notifications": [],
                     "query": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"",
-                    "queryId": "09825b9a-2ac2-424e-b758-edcc39ef31fc",
+                    "queryId": "e51ef957-69ed-4ef0-8ac7-ab7879674602",
                     "sampled": false,
-                    "scannedBytes": 861,
+                    "scannedBytes": 1303,
                     "scannedDataPoints": 0,
-                    "scannedRecords": 4,
+                    "scannedRecords": 5,
                     "timezone": "Australia/Sydney"
                   }
                 },
                 "records": [
+                  {
+                    "Default config backup": "yes",
+                    "GITHUB_TRIGGERING_ACTOR": "agardnerIT",
+                    "Link to Action": "https://github.com/agardnerIT/terraform-action/actions/runs/9361753750",
+                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
+                    "duration": 7,
+                    "event.id": "c822ccca-9a1d-42f3-a4a9-ff4cedc6a94c",
+                    "event.kind": "BIZ_EVENT",
+                    "event.provider": "github.actions",
+                    "event.type": "com.mycompany.dynatrace.configuration.backup",
+                    "timestamp": "2024-06-04T15:31:46.318000000+10:00"
+                  },
                   {
                     "GITHUB_TRIGGERING_ACTOR": "agardnerIT",
                     "Link to Action": "https://github.com/agardnerIT/terraform-action/actions/runs/9361735774",
@@ -128,6 +140,9 @@ resource "dynatrace_document" "Untitled_notebook" {
                       0
                     ],
                     "mappings": {
+                      "Default config backup": {
+                        "type": "string"
+                      },
                       "GITHUB_TRIGGERING_ACTOR": {
                         "type": "string"
                       },
@@ -161,6 +176,41 @@ resource "dynatrace_document" "Untitled_notebook" {
                     "indexRange": [
                       1,
                       1
+                    ],
+                    "mappings": {
+                      "GITHUB_TRIGGERING_ACTOR": {
+                        "type": "string"
+                      },
+                      "Link to Action": {
+                        "type": "string"
+                      },
+                      "dataschema": {
+                        "type": "string"
+                      },
+                      "duration": {
+                        "type": "double"
+                      },
+                      "event.id": {
+                        "type": "string"
+                      },
+                      "event.kind": {
+                        "type": "string"
+                      },
+                      "event.provider": {
+                        "type": "string"
+                      },
+                      "event.type": {
+                        "type": "string"
+                      },
+                      "timestamp": {
+                        "type": "timestamp"
+                      }
+                    }
+                  },
+                  {
+                    "indexRange": [
+                      2,
+                      2
                     ],
                     "mappings": {
                       "Link to Action": {
