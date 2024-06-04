@@ -56,7 +56,7 @@ resource "dynatrace_document" "Untitled_notebook" {
             },
             "result": {
               "code": 200,
-              "dateTime": "2024-06-04T04:45:28.847Z",
+              "dateTime": "2024-06-04T05:26:50.528Z",
               "input": {
                 "timeframe": {
                   "details": {
@@ -81,8 +81,8 @@ resource "dynatrace_document" "Untitled_notebook" {
                 "metadata": {
                   "grail": {
                     "analysisTimeframe": {
-                      "end": "2024-06-04T04:45:28.848Z",
-                      "start": "2024-06-04T04:15:28.848Z"
+                      "end": "2024-06-04T05:26:50.529Z",
+                      "start": "2024-06-04T04:56:50.529Z"
                     },
                     "canonicalQuery": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"",
                     "dqlVersion": "V1_0",
@@ -90,23 +90,24 @@ resource "dynatrace_document" "Untitled_notebook" {
                     "locale": "und",
                     "notifications": [],
                     "query": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"",
-                    "queryId": "c51285e3-cefe-4f76-a8c2-6d92d516189c",
+                    "queryId": "832ee8bc-1073-4be6-97d8-24e82e122cc9",
                     "sampled": false,
-                    "scannedBytes": 320,
+                    "scannedBytes": 430,
                     "scannedDataPoints": 0,
-                    "scannedRecords": 2,
+                    "scannedRecords": 3,
                     "timezone": "Australia/Sydney"
                   }
                 },
                 "records": [
                   {
+                    "Link to Action": "https://github.com/agardnerIT/terraform-action/actions/runs/9361697422",
                     "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
-                    "duration": 7,
-                    "event.id": "24eb4dcc-3168-44f0-a1f0-5d7a2c9e4f42",
+                    "duration": 6,
+                    "event.id": "b3afef38-82f7-4464-b9e0-0ac3751e079a",
                     "event.kind": "BIZ_EVENT",
                     "event.provider": "github.actions",
                     "event.type": "com.mycompany.dynatrace.configuration.backup",
-                    "timestamp": "2024-06-04T14:19:55.016000000+10:00"
+                    "timestamp": "2024-06-04T15:26:01.498000000+10:00"
                   }
                 ],
                 "types": [
@@ -116,6 +117,9 @@ resource "dynatrace_document" "Untitled_notebook" {
                       0
                     ],
                     "mappings": {
+                      "Link to Action": {
+                        "type": "string"
+                      },
                       "dataschema": {
                         "type": "string"
                       },
