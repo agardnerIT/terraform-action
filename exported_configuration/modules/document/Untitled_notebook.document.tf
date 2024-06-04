@@ -56,7 +56,7 @@ resource "dynatrace_document" "Untitled_notebook" {
             },
             "result": {
               "code": 200,
-              "dateTime": "2024-06-04T05:33:21.054Z",
+              "dateTime": "2024-06-04T05:50:24.851Z",
               "input": {
                 "timeframe": {
                   "details": {
@@ -81,20 +81,20 @@ resource "dynatrace_document" "Untitled_notebook" {
                 "metadata": {
                   "grail": {
                     "analysisTimeframe": {
-                      "end": "2024-06-04T05:33:21.055Z",
-                      "start": "2024-06-04T05:03:21.055Z"
+                      "end": "2024-06-04T05:50:24.854Z",
+                      "start": "2024-06-04T05:20:24.854Z"
                     },
                     "canonicalQuery": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"",
                     "dqlVersion": "V1_0",
-                    "executionTimeMilliseconds": 31,
+                    "executionTimeMilliseconds": 26,
                     "locale": "und",
                     "notifications": [],
                     "query": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"",
-                    "queryId": "e51ef957-69ed-4ef0-8ac7-ab7879674602",
+                    "queryId": "e6d67930-a5d3-43f8-b3ef-c60375127013",
                     "sampled": false,
-                    "scannedBytes": 1303,
+                    "scannedBytes": 1767,
                     "scannedDataPoints": 0,
-                    "scannedRecords": 5,
+                    "scannedRecords": 6,
                     "timezone": "Australia/Sydney"
                   }
                 },
@@ -110,6 +110,18 @@ resource "dynatrace_document" "Untitled_notebook" {
                     "event.provider": "github.actions",
                     "event.type": "com.mycompany.dynatrace.configuration.backup",
                     "timestamp": "2024-06-04T15:31:46.318000000+10:00"
+                  },
+                  {
+                    "Default config backup": "yes",
+                    "GITHUB_TRIGGERING_ACTOR": "agardnerIT",
+                    "Link to Action": "https://github.com/agardnerIT/terraform-action/actions/runs/9361803479",
+                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
+                    "duration": 7,
+                    "event.id": "13a8adb8-be59-4ead-8fa0-c8f7c705e94e",
+                    "event.kind": "BIZ_EVENT",
+                    "event.provider": "github.actions",
+                    "event.type": "com.mycompany.dynatrace.configuration.backup",
+                    "timestamp": "2024-06-04T15:36:51.901000000+10:00"
                   },
                   {
                     "GITHUB_TRIGGERING_ACTOR": "agardnerIT",
@@ -137,7 +149,7 @@ resource "dynatrace_document" "Untitled_notebook" {
                   {
                     "indexRange": [
                       0,
-                      0
+                      1
                     ],
                     "mappings": {
                       "Default config backup": {
@@ -174,8 +186,8 @@ resource "dynatrace_document" "Untitled_notebook" {
                   },
                   {
                     "indexRange": [
-                      1,
-                      1
+                      2,
+                      2
                     ],
                     "mappings": {
                       "GITHUB_TRIGGERING_ACTOR": {
@@ -209,8 +221,8 @@ resource "dynatrace_document" "Untitled_notebook" {
                   },
                   {
                     "indexRange": [
-                      2,
-                      2
+                      3,
+                      3
                     ],
                     "mappings": {
                       "Link to Action": {
