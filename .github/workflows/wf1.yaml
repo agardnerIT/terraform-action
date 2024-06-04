@@ -28,10 +28,10 @@ jobs:
         run: mv terraform-provider-dynatrace_v${{env.DT_VERSION}} terraform-provider-dynatrace
       
       - name: "Bulk Export"
-        run: "./terraform-provider-dynatrace --skip-terraform-init true --export"
+        run: "./terraform-provider-dynatrace --export"
       
       - name: "Export non-default items"
-        run: "./terraform-provider-dynatrace --skip-terraform-init true --export ${{env.DT_ADDITIONAL_CONFIG_TYPES}}"
+        run: "./terraform-provider-dynatrace --export ${{env.DT_ADDITIONAL_CONFIG_TYPES}}"
 
       - name: "List files and folders"
         run: "ls -al"
