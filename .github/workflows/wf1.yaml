@@ -37,15 +37,9 @@ jobs:
 
       - name: "List files and folders"
         run: "ls -al"
-      
-      - name: switching from HTTPS to SSH
-        run: git remote set-url origin ${{ secrets.ssh }}
-      
-      - name: fetch from main
-        run: git fetch origin main
 
-      - name: push code to master
-        run: git push origin HEAD:main
+      - name: "Configure Git"
+        run: "git config --local user.name 'gha_bot'"
 
       - name: "Commit files to repo"
         run: "git add ${{ env.DYNATRACE_TARGET_FOLDER }}/* && git commit -m 'update backup' && git push"
