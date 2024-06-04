@@ -70,7 +70,7 @@ jobs:
       
       - name: "Temp: Set start time"
         run: >
-            startTime=$(($endTime - 4)) &&
+            startTime=$(($GHA_END_TIME - 4)) &&
             echo "GHA_START_TIME=$startTime" >> "$GITHUB_ENV"
 
       - name: "Generate time diff and event UUID"
