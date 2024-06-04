@@ -17,7 +17,9 @@ jobs:
     steps:
 # WORKING    
       - name: "Note start time"
-        run: "export startTime=$(date +%s)"
+        run: >
+            startTime=$(date +%s) &&
+            echo "GHA_START_TIME=$startTime" >> "$GITHUB_ENV"
 
 # WORKING
       # - name: Check out repository code
