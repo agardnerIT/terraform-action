@@ -45,7 +45,7 @@ resource "dynatrace_document" "Untitled_notebook" {
                 "from": "now-30m",
                 "to": "now"
               },
-              "value": "fetch bizevents\n| filter corr_id == \"a4\"\n//| summarize eventsCount = count(), by:{event.provider,event.type}\n//| sort eventsCount desc"
+              "value": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\""
             },
             "querySettings": {
               "defaultSamplingRatio": 10,
@@ -56,7 +56,7 @@ resource "dynatrace_document" "Untitled_notebook" {
             },
             "result": {
               "code": 200,
-              "dateTime": "2024-05-31T01:29:20.122Z",
+              "dateTime": "2024-06-04T04:24:40.572Z",
               "input": {
                 "timeframe": {
                   "details": {
@@ -74,116 +74,53 @@ resource "dynatrace_document" "Untitled_notebook" {
                   "from": "now-30m",
                   "to": "now"
                 },
-                "value": "fetch bizevents\n| filter corr_id == \"a4\"\n//| summarize eventsCount = count(), by:{event.provider,event.type}\n//| sort eventsCount desc"
+                "value": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\""
               },
               "notifications": [],
               "value": {
                 "metadata": {
                   "grail": {
                     "analysisTimeframe": {
-                      "end": "2024-05-31T01:29:20.123Z",
-                      "start": "2024-05-31T00:59:20.123Z"
+                      "end": "2024-06-04T04:24:40.573Z",
+                      "start": "2024-06-04T03:54:40.573Z"
                     },
-                    "canonicalQuery": "fetch bizevents\n| filter corr_id == \"a4\"",
+                    "canonicalQuery": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"",
                     "dqlVersion": "V1_0",
-                    "executionTimeMilliseconds": 37,
+                    "executionTimeMilliseconds": 29,
                     "locale": "und",
                     "notifications": [],
-                    "query": "fetch bizevents\n| filter corr_id == \"a4\"\n//| summarize eventsCount = count(), by:{event.provider,event.type}\n//| sort eventsCount desc",
-                    "queryId": "b0f06771-deab-43c1-b5ae-619c200baf06",
+                    "query": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"",
+                    "queryId": "fcb68136-02de-4f5b-93ab-b7f3dc43bb54",
                     "sampled": false,
-                    "scannedBytes": 2255,
+                    "scannedBytes": 320,
                     "scannedDataPoints": 0,
-                    "scannedRecords": 14,
+                    "scannedRecords": 2,
                     "timezone": "Australia/Sydney"
                   }
                 },
                 "records": [
                   {
-                    "corr_id": "a4",
                     "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
-                    "event.id": "4543ef5c668d16d2fc9cc671357b51ca",
+                    "duration": 7,
+                    "event.id": "24eb4dcc-3168-44f0-a1f0-5d7a2c9e4f42",
                     "event.kind": "BIZ_EVENT",
-                    "event.provider": "my_shell_script",
-                    "event.type": "com.mycompany.loadtest.rampdown.finished",
-                    "timestamp": "2024-05-31T11:28:53.426000000+10:00"
-                  },
-                  {
-                    "corr_id": "a4",
-                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
-                    "event.id": "4027c2ce44f3997ab862b359eaf552b6",
-                    "event.kind": "BIZ_EVENT",
-                    "event.provider": "my_shell_script",
-                    "event.type": "com.mycompany.loadtest.steadystate.finished",
-                    "timestamp": "2024-05-31T11:28:51.349000000+10:00"
-                  },
-                  {
-                    "corr_id": "a4",
-                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
-                    "event.id": "876ec12c59c2b431721bb87df18faf06",
-                    "event.kind": "BIZ_EVENT",
-                    "event.provider": "my_shell_script",
-                    "event.type": "com.mycompany.loadtest.rampdown.started",
-                    "timestamp": "2024-05-31T11:28:51.720000000+10:00"
-                  },
-                  {
-                    "corr_id": "a4",
-                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
-                    "event.id": "349fd1a9c804899947ed2c2594d2b18e",
-                    "event.kind": "BIZ_EVENT",
-                    "event.provider": "my_shell_script",
-                    "event.type": "com.mycompany.loadtest.steadystate.started",
-                    "timestamp": "2024-05-31T11:28:45.595000000+10:00"
-                  },
-                  {
-                    "corr_id": "a4",
-                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
-                    "event.id": "9b4884bd2f1610e3ae7cab401c495c61",
-                    "event.kind": "BIZ_EVENT",
-                    "event.provider": "my_shell_script",
-                    "event.type": "com.mycompany.loadtest.rampup.finished",
-                    "timestamp": "2024-05-31T11:28:45.113000000+10:00"
-                  },
-                  {
-                    "corr_id": "a4",
-                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
-                    "event.id": "567897f36e96f25ebebf248db1d87045",
-                    "event.kind": "BIZ_EVENT",
-                    "event.provider": "my_shell_script",
-                    "event.type": "com.mycompany.loadtest.finished",
-                    "timestamp": "2024-05-31T11:28:53.873000000+10:00"
-                  },
-                  {
-                    "corr_id": "a4",
-                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
-                    "event.id": "80138d93cf3db7d10c0efcbc437498ed",
-                    "event.kind": "BIZ_EVENT",
-                    "event.provider": "my_shell_script",
-                    "event.type": "com.mycompany.loadtest.started",
-                    "timestamp": "2024-05-31T11:28:41.014000000+10:00"
-                  },
-                  {
-                    "corr_id": "a4",
-                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
-                    "event.id": "c26ce2307777f55165be50ba8b5a8d30",
-                    "event.kind": "BIZ_EVENT",
-                    "event.provider": "my_shell_script",
-                    "event.type": "com.mycompany.loadtest.rampup.started",
-                    "timestamp": "2024-05-31T11:28:42.497000000+10:00"
+                    "event.provider": "github.actions",
+                    "event.type": "com.mycompany.dynatrace.configuration.backup",
+                    "timestamp": "2024-06-04T14:19:55.016000000+10:00"
                   }
                 ],
                 "types": [
                   {
                     "indexRange": [
                       0,
-                      7
+                      0
                     ],
                     "mappings": {
-                      "corr_id": {
-                        "type": "string"
-                      },
                       "dataschema": {
                         "type": "string"
+                      },
+                      "duration": {
+                        "type": "double"
                       },
                       "event.id": {
                         "type": "string"
@@ -210,8 +147,10 @@ resource "dynatrace_document" "Untitled_notebook" {
             "visualizationSettings": {
               "chartSettings": {
                 "categoricalBarChartSettings": {
-                  "categoryAxisLabel": "host.name",
-                  "valueAxisLabel": "total"
+                  "categoryAxis": "dataschema",
+                  "categoryAxisLabel": "dataschema",
+                  "valueAxis": "duration",
+                  "valueAxisLabel": "duration"
                 },
                 "categoryOverrides": {},
                 "circleChartSettings": {
@@ -219,15 +158,29 @@ resource "dynatrace_document" "Untitled_notebook" {
                   "groupingThresholdValue": 0,
                   "valueType": "relative"
                 },
+                "fieldMapping": {
+                  "leftAxisDimensions": [
+                    "dataschema"
+                  ],
+                  "leftAxisValues": [
+                    "duration"
+                  ],
+                  "timestamp": "timestamp"
+                },
                 "gapPolicy": "connect",
                 "hiddenLegendFields": []
               },
               "histogram": {
-                "dataMappings": []
+                "dataMappings": [
+                  {
+                    "rangeAxis": "",
+                    "valueAxis": "duration"
+                  }
+                ]
               },
               "honeycomb": {
                 "dataMappings": {
-                  "category": "corr_id",
+                  "category": "dataschema",
                   "value": "timestamp"
                 },
                 "legend": "auto",
@@ -240,6 +193,321 @@ resource "dynatrace_document" "Untitled_notebook" {
                 "label": "",
                 "prefixIcon": "",
                 "recordField": "event.provider",
+                "showLabel": true
+              },
+              "table": {
+                "columnWidths": {},
+                "enableSparklines": false,
+                "firstVisibleRowIndex": 0,
+                "hiddenColumns": [],
+                "lineWrapIds": [],
+                "rowDensity": "condensed"
+              },
+              "thresholds": []
+            }
+          },
+          "title": "Raw List of Backups",
+          "type": "dql"
+        },
+        {
+          "drilldownPath": [],
+          "id": "1bb560f7-32e1-4c17-8554-cdebc34b346e",
+          "showTitle": true,
+          "state": {
+            "davis": {
+              "davisVisualization": {}
+            },
+            "input": {
+              "timeframe": {
+                "details": {
+                  "from": {
+                    "date": "2024-05-31T00:44:42.426Z",
+                    "normalized": "now-30m",
+                    "type": "expression"
+                  },
+                  "to": {
+                    "date": "2024-05-31T01:14:42.426Z",
+                    "normalized": "now",
+                    "type": "expression"
+                  }
+                },
+                "from": "now-30m",
+                "to": "now"
+              },
+              "value": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"\n| summarize eventsCount = count(), by:{event.provider,event.type}"
+            },
+            "querySettings": {
+              "defaultSamplingRatio": 10,
+              "defaultScanLimitGbytes": 500,
+              "enableSampling": false,
+              "maxResultMegaBytes": 1,
+              "maxResultRecords": 1000
+            },
+            "result": {
+              "code": 200,
+              "dateTime": "2024-06-04T04:24:14.460Z",
+              "input": {
+                "timeframe": {
+                  "details": {
+                    "from": {
+                      "date": "2024-05-31T00:44:42.426Z",
+                      "normalized": "now-30m",
+                      "type": "expression"
+                    },
+                    "to": {
+                      "date": "2024-05-31T01:14:42.426Z",
+                      "normalized": "now",
+                      "type": "expression"
+                    }
+                  },
+                  "from": "now-30m",
+                  "to": "now"
+                },
+                "value": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"\n| summarize eventsCount = count(), by:{event.provider,event.type}"
+              },
+              "notifications": [],
+              "value": {
+                "metadata": {
+                  "grail": {
+                    "analysisTimeframe": {
+                      "end": "2024-06-04T04:24:14.461Z",
+                      "start": "2024-06-04T03:54:14.461Z"
+                    },
+                    "canonicalQuery": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"\n| summarize by:{event.provider, event.type}, eventsCount = count()",
+                    "dqlVersion": "V1_0",
+                    "executionTimeMilliseconds": 29,
+                    "locale": "und",
+                    "notifications": [],
+                    "query": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"\n| summarize eventsCount = count(), by:{event.provider,event.type}",
+                    "queryId": "f2ca038c-7dcd-444e-aa1c-3c41caf96131",
+                    "sampled": false,
+                    "scannedBytes": 320,
+                    "scannedDataPoints": 0,
+                    "scannedRecords": 2,
+                    "timezone": "Australia/Sydney"
+                  }
+                },
+                "records": [
+                  {
+                    "event.provider": "github.actions",
+                    "event.type": "com.mycompany.dynatrace.configuration.backup",
+                    "eventsCount": "1"
+                  }
+                ],
+                "types": [
+                  {
+                    "indexRange": [
+                      0,
+                      0
+                    ],
+                    "mappings": {
+                      "event.provider": {
+                        "type": "string"
+                      },
+                      "event.type": {
+                        "type": "string"
+                      },
+                      "eventsCount": {
+                        "type": "long"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "state": "success",
+            "visualization": "singleValue",
+            "visualizationSettings": {
+              "chartSettings": {
+                "categoricalBarChartSettings": {
+                  "categoryAxis": "event.provider",
+                  "categoryAxisLabel": "event.provider",
+                  "valueAxis": "eventsCount",
+                  "valueAxisLabel": "eventsCount"
+                },
+                "categoryOverrides": {},
+                "circleChartSettings": {
+                  "groupingThresholdType": "relative",
+                  "groupingThresholdValue": 0,
+                  "valueType": "relative"
+                },
+                "gapPolicy": "connect",
+                "hiddenLegendFields": []
+              },
+              "histogram": {
+                "dataMappings": [
+                  {
+                    "rangeAxis": "",
+                    "valueAxis": "eventsCount"
+                  }
+                ]
+              },
+              "honeycomb": {
+                "dataMappings": {
+                  "category": "event.provider",
+                  "value": "event.type"
+                },
+                "legend": "auto",
+                "shape": "hexagon"
+              },
+              "singleValue": {
+                "alignment": "center",
+                "autoscale": true,
+                "colorThresholdTarget": "value",
+                "label": "backup(s)",
+                "prefixIcon": "",
+                "recordField": "eventsCount",
+                "showLabel": true
+              },
+              "table": {
+                "columnWidths": {},
+                "enableSparklines": false,
+                "firstVisibleRowIndex": 0,
+                "hiddenColumns": [],
+                "lineWrapIds": [],
+                "rowDensity": "condensed"
+              },
+              "thresholds": []
+            }
+          },
+          "title": "Investigate origin of business event",
+          "type": "dql"
+        },
+        {
+          "drilldownPath": [],
+          "id": "4743eecc-bcbd-4165-83a4-3d3ccde9aae4",
+          "showTitle": true,
+          "state": {
+            "davis": {
+              "davisVisualization": {}
+            },
+            "input": {
+              "timeframe": {
+                "details": {
+                  "from": {
+                    "date": "2024-05-31T00:44:42.426Z",
+                    "normalized": "now-30m",
+                    "type": "expression"
+                  },
+                  "to": {
+                    "date": "2024-05-31T01:14:42.426Z",
+                    "normalized": "now",
+                    "type": "expression"
+                  }
+                },
+                "from": "now-30m",
+                "to": "now"
+              },
+              "value": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"\n| summarize avgBackupDuration = avg(duration)"
+            },
+            "querySettings": {
+              "defaultSamplingRatio": 10,
+              "defaultScanLimitGbytes": 500,
+              "enableSampling": false,
+              "maxResultMegaBytes": 1,
+              "maxResultRecords": 1000
+            },
+            "result": {
+              "code": 200,
+              "dateTime": "2024-06-04T04:23:08.525Z",
+              "input": {
+                "timeframe": {
+                  "details": {
+                    "from": {
+                      "date": "2024-05-31T00:44:42.426Z",
+                      "normalized": "now-30m",
+                      "type": "expression"
+                    },
+                    "to": {
+                      "date": "2024-05-31T01:14:42.426Z",
+                      "normalized": "now",
+                      "type": "expression"
+                    }
+                  },
+                  "from": "now-30m",
+                  "to": "now"
+                },
+                "value": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"\n| summarize avgBackupDuration = avg(duration)"
+              },
+              "notifications": [],
+              "value": {
+                "metadata": {
+                  "grail": {
+                    "analysisTimeframe": {
+                      "end": "2024-06-04T04:23:08.527Z",
+                      "start": "2024-06-04T03:53:08.526Z"
+                    },
+                    "canonicalQuery": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"\n| summarize avgBackupDuration = avg(duration)",
+                    "dqlVersion": "V1_0",
+                    "executionTimeMilliseconds": 25,
+                    "locale": "und",
+                    "notifications": [],
+                    "query": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"\n| summarize avgBackupDuration = avg(duration)",
+                    "queryId": "9c803240-67cb-40ff-a9b9-8d912dc7a0a1",
+                    "sampled": false,
+                    "scannedBytes": 320,
+                    "scannedDataPoints": 0,
+                    "scannedRecords": 2,
+                    "timezone": "Australia/Sydney"
+                  }
+                },
+                "records": [
+                  {
+                    "avgBackupDuration": 7
+                  }
+                ],
+                "types": [
+                  {
+                    "indexRange": [
+                      0,
+                      0
+                    ],
+                    "mappings": {
+                      "avgBackupDuration": {
+                        "type": "double"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "state": "success",
+            "visualization": "singleValue",
+            "visualizationSettings": {
+              "chartSettings": {
+                "categoricalBarChartSettings": {
+                  "categoryAxisLabel": "event.provider",
+                  "valueAxisLabel": "eventsCount"
+                },
+                "categoryOverrides": {},
+                "circleChartSettings": {
+                  "groupingThresholdType": "relative",
+                  "groupingThresholdValue": 0,
+                  "valueType": "relative"
+                },
+                "gapPolicy": "connect",
+                "hiddenLegendFields": []
+              },
+              "histogram": {
+                "dataMappings": [
+                  {
+                    "rangeAxis": "",
+                    "valueAxis": "avgBackupDuration"
+                  }
+                ]
+              },
+              "honeycomb": {
+                "dataMappings": {},
+                "legend": "auto",
+                "shape": "hexagon"
+              },
+              "singleValue": {
+                "alignment": "center",
+                "autoscale": true,
+                "colorThresholdTarget": "value",
+                "label": "seconds",
+                "prefixIcon": "",
+                "recordField": "avgBackupDuration",
                 "showLabel": true
               },
               "table": {
