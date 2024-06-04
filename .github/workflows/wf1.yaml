@@ -39,7 +39,7 @@ jobs:
         run: "ls -al"
 
       - name: "Configure Git"
-        run: "git config --local user.name 'gha_bot'"
+        run: "git config --local user.name 'gha_bot' && git config --local user.email 'gha_bot@nowhere.com'"
 
       - name: "Commit files to repo"
         run: "git add ${{ env.DYNATRACE_TARGET_FOLDER }}/* && git commit -m 'update backup' && git push"
