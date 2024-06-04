@@ -48,11 +48,16 @@ jobs:
             git diff-index --quiet HEAD || git commit -m 'update backup' &&
             git push
       
-      - name: "Send bizevent"
+      - name: "Generate times and event UUID"
         run: >
             endTime=$(date +%s) &&
+            export $endTime &&
             timeDiff=$(($endTime - $startTime)) &&
-            eventUUID=$(uuidgen) &&
+            export $timeDiff &&
+            eventUUID=$(uuidgen)
+
+      - name: "Send bizevent"
+        run: >
             curl -X POST "${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest" \
               -H "accept: application/json; charset=utf-8" \
               -H "Authorization: Api-Token ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}" \
