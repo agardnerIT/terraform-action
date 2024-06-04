@@ -56,7 +56,7 @@ resource "dynatrace_document" "Untitled_notebook" {
             },
             "result": {
               "code": 200,
-              "dateTime": "2024-06-04T05:26:50.528Z",
+              "dateTime": "2024-06-04T05:30:19.776Z",
               "input": {
                 "timeframe": {
                   "details": {
@@ -81,24 +81,35 @@ resource "dynatrace_document" "Untitled_notebook" {
                 "metadata": {
                   "grail": {
                     "analysisTimeframe": {
-                      "end": "2024-06-04T05:26:50.529Z",
-                      "start": "2024-06-04T04:56:50.529Z"
+                      "end": "2024-06-04T05:30:19.778Z",
+                      "start": "2024-06-04T05:00:19.778Z"
                     },
                     "canonicalQuery": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"",
                     "dqlVersion": "V1_0",
-                    "executionTimeMilliseconds": 21,
+                    "executionTimeMilliseconds": 22,
                     "locale": "und",
                     "notifications": [],
                     "query": "fetch bizevents\n| filter event.type == \"com.mycompany.dynatrace.configuration.backup\"\n| filter event.provider == \"github.actions\"",
-                    "queryId": "832ee8bc-1073-4be6-97d8-24e82e122cc9",
+                    "queryId": "09825b9a-2ac2-424e-b758-edcc39ef31fc",
                     "sampled": false,
-                    "scannedBytes": 430,
+                    "scannedBytes": 861,
                     "scannedDataPoints": 0,
-                    "scannedRecords": 3,
+                    "scannedRecords": 4,
                     "timezone": "Australia/Sydney"
                   }
                 },
                 "records": [
+                  {
+                    "GITHUB_TRIGGERING_ACTOR": "agardnerIT",
+                    "Link to Action": "https://github.com/agardnerIT/terraform-action/actions/runs/9361735774",
+                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
+                    "duration": 6,
+                    "event.id": "6d4257c5-d19c-495b-af57-d6c78d3c0d87",
+                    "event.kind": "BIZ_EVENT",
+                    "event.provider": "github.actions",
+                    "event.type": "com.mycompany.dynatrace.configuration.backup",
+                    "timestamp": "2024-06-04T15:29:48.016000000+10:00"
+                  },
                   {
                     "Link to Action": "https://github.com/agardnerIT/terraform-action/actions/runs/9361697422",
                     "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0",
@@ -115,6 +126,41 @@ resource "dynatrace_document" "Untitled_notebook" {
                     "indexRange": [
                       0,
                       0
+                    ],
+                    "mappings": {
+                      "GITHUB_TRIGGERING_ACTOR": {
+                        "type": "string"
+                      },
+                      "Link to Action": {
+                        "type": "string"
+                      },
+                      "dataschema": {
+                        "type": "string"
+                      },
+                      "duration": {
+                        "type": "double"
+                      },
+                      "event.id": {
+                        "type": "string"
+                      },
+                      "event.kind": {
+                        "type": "string"
+                      },
+                      "event.provider": {
+                        "type": "string"
+                      },
+                      "event.type": {
+                        "type": "string"
+                      },
+                      "timestamp": {
+                        "type": "timestamp"
+                      }
+                    }
+                  },
+                  {
+                    "indexRange": [
+                      1,
+                      1
                     ],
                     "mappings": {
                       "Link to Action": {
