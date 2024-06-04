@@ -2,7 +2,7 @@ name: Run Terraform
 on: workflow_dispatch
 env:
   DT_VERSION: "1.58.0"
-  DT_CONFIG_TYPES: ""
+  DT_CONFIG_TYPES: "dynatrace_dashboard"
 
 jobs:
   Export-Configuration:
@@ -26,7 +26,6 @@ jobs:
       - name: "Run Binary"
         # run: "echo \"DYNATRACE_ENV_URL = ${{ secrets.DYNATRACE_ENV_URL }}\""
         env:
-          DT_CONFIG_TYPES: ${{ env.DT_CONFIG_TYPES }}
           DYNATRACE_ENV_URL: ${{ secrets.DYNATRACE_ENV_URL }}
           DYNATRACE_API_TOKEN: ${{ secrets.DYNATRACE_API_TOKEN }}
           DYNATRACE_AUTOMATION_CLIENT_ID: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_ID }}
