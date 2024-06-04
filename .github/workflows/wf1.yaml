@@ -21,12 +21,12 @@ jobs:
         run: >
           echo "GHA_START_TIME=$(date +%s)" >> "$GITHUB_ENV"
 
-      - name: "Configure Git"
-        run: "git config --local user.name 'gha_bot' && git config --local user.email 'gha_bot@nowhere.com'"
-
 # WORKING
       - name: Check out repository code
         uses: actions/checkout@v4
+      
+      - name: "Configure Git"
+        run: "git config --local user.name 'gha_bot' && git config --local user.email 'gha_bot@nowhere.com'"
 
 # WORKING      
       - name: "Get Binary"
