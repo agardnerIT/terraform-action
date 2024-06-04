@@ -63,28 +63,30 @@ jobs:
         run: >
             printenv
 
-      # - name: "Generate times and event UUID"
-      #   run: >
-      #       endTime=$(date +%s) &&
-      #       timeDiff=$(($endTime - $startTime)) &&
+      - name: "Generate times and event UUID"
+        run: >
+            endTime=$(date +%s) &&
+            echo "GHA_END_TIME=$endTime" >> "$GITHUB_ENV"
+            timeDiff=$(($gha_end_time - $gha_start_time)) &&
+            echo "GHA_TIME_DIFF=$timeDiff"
       #       eventUUID=$(uuidgen)
 
-      # - name: "Send bizevent"
-      #   run: >
-      #       curl -X POST "${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest" \
-      #         -H "accept: application/json; charset=utf-8" \
-      #         -H "Authorization: Api-Token ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}" \
-      #         -H "Content-Type: application/cloudevent+json" \
-      #         -d "{ \
-      #               "specversion": "1.0", \
-      #               "id": "$eventUUID", \
-      #               "source": "github.actions", \
-      #               "type": "com.mycompany.dynatrace.configuration.backup", \
-      #               "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0", \
-      #               "data": { \
-      #                   "duration": $timeDiff \
-      #               } \
-      #             }"
+      - name: "Send bizevent"
+        run: >
+            curl -X POST "${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest" \
+              -H "accept: application/json; charset=utf-8" \
+              -H "Authorization: Api-Token ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}" \
+              -H "Content-Type: application/cloudevent+json" \
+              -d "{ \
+                    "specversion": "1.0", \
+                    "id": "$eventUUID", \
+                    "source": "github.actions", \
+                    "type": "com.mycompany.dynatrace.configuration.backup", \
+                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0", \
+                    "data": { \
+                        "duration": $gha_time_diff \
+                    } \
+                  }"
       
       # - name: Calculate Duration
       #   run: "let \"timeDiff = $endTime - $startTime\" && export timeDiff"
