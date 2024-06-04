@@ -15,61 +15,74 @@ jobs:
     environment: DUMMY
     runs-on: ubuntu-latest
     steps:
+# WORKING    
       - name: "Note start time"
         run: "export startTime=$(date +%s)"
 
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      
-      - name: "Get Binary"
-        run: wget https://github.com/dynatrace-oss/terraform-provider-dynatrace/releases/download/v${{env.DT_VERSION}}/terraform-provider-dynatrace_${{env.DT_VERSION}}_linux_amd64.zip
-      
-      - name: "Unzip Binary"
-        run: unzip -n terraform-provider-dynatrace_${{env.DT_VERSION}}_linux_amd64.zip
-      
-      - name: "Rename Binary"
-        env:
-          DT_VERSION: "1.58.0"
-        run: mv terraform-provider-dynatrace_v${{env.DT_VERSION}} terraform-provider-dynatrace
-      
-      - name: "Bulk Export"
-        run: "./terraform-provider-dynatrace -export -skip-terraform-init=True"
-      
-      - name: "Export non-default items"
-        if: env.DT_ADDITIONAL_CONFIG_TYPES != '' # Run only if additional configs are specified. Note: Your tokens and oAuth need to the correct permissions!
-        run: "./terraform-provider-dynatrace -export -skip-terraform-init=True ${{env.DT_ADDITIONAL_CONFIG_TYPES}}"
+# WORKING
+      # - name: Check out repository code
+      #   uses: actions/checkout@v4
 
-      - name: "Configure Git"
-        run: "git config --local user.name 'gha_bot' && git config --local user.email 'gha_bot@nowhere.com'"
+# WORKING      
+      # - name: "Get Binary"
+      #   run: wget https://github.com/dynatrace-oss/terraform-provider-dynatrace/releases/download/v${{env.DT_VERSION}}/terraform-provider-dynatrace_${{env.DT_VERSION}}_linux_amd64.zip
 
-      - name: "Commit files to repo"
-        run: >
-            git add ${{ env.DYNATRACE_TARGET_FOLDER }}/* &&
-            git diff-index --quiet HEAD || git commit -m 'update backup' &&
-            git push
+# WORKING      
+      # - name: "Unzip Binary"
+      #   run: unzip -n terraform-provider-dynatrace_${{env.DT_VERSION}}_linux_amd64.zip
+
+# WORKING      
+      # - name: "Rename Binary"
+      #   env:
+      #     DT_VERSION: "1.58.0"
+      #   run: mv terraform-provider-dynatrace_v${{env.DT_VERSION}} terraform-provider-dynatrace
+
+ # WORKING       
+      # - name: "Bulk Export"
+      #   run: "./terraform-provider-dynatrace -export -skip-terraform-init=True"
+
+# WORKING
+      # - name: "Export non-default items"
+      #   if: env.DT_ADDITIONAL_CONFIG_TYPES != '' # Run only if additional configs are specified. Note: Your tokens and oAuth need to the correct permissions!
+      #   run: "./terraform-provider-dynatrace -export -skip-terraform-init=True ${{env.DT_ADDITIONAL_CONFIG_TYPES}}"
+
+# WORKING
+      # - name: "Configure Git"
+      #   run: "git config --local user.name 'gha_bot' && git config --local user.email 'gha_bot@nowhere.com'"
+
+# WORKING
+      # - name: "Commit files to repo"
+      #   run: >
+      #       git add ${{ env.DYNATRACE_TARGET_FOLDER }}/* &&
+      #       git diff-index --quiet HEAD || git commit -m 'update backup' &&
+      #       git push
       
-      - name: "Generate times and event UUID"
+      - name: "Print env"
         run: >
-            endTime=$(date +%s) &&
-            timeDiff=$(($endTime - $startTime)) &&
-            eventUUID=$(uuidgen)
+            printenv
 
-      - name: "Send bizevent"
-        run: >
-            curl -X POST "${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest" \
-              -H "accept: application/json; charset=utf-8" \
-              -H "Authorization: Api-Token ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}" \
-              -H "Content-Type: application/cloudevent+json" \
-              -d "{ \
-                    "specversion": "1.0", \
-                    "id": "$eventUUID", \
-                    "source": "github.actions", \
-                    "type": "com.mycompany.dynatrace.configuration.backup", \
-                    "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0", \
-                    "data": { \
-                        "duration": $timeDiff \
-                    } \
-                  }"
+      # - name: "Generate times and event UUID"
+      #   run: >
+      #       endTime=$(date +%s) &&
+      #       timeDiff=$(($endTime - $startTime)) &&
+      #       eventUUID=$(uuidgen)
+
+      # - name: "Send bizevent"
+      #   run: >
+      #       curl -X POST "${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest" \
+      #         -H "accept: application/json; charset=utf-8" \
+      #         -H "Authorization: Api-Token ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}" \
+      #         -H "Content-Type: application/cloudevent+json" \
+      #         -d "{ \
+      #               "specversion": "1.0", \
+      #               "id": "$eventUUID", \
+      #               "source": "github.actions", \
+      #               "type": "com.mycompany.dynatrace.configuration.backup", \
+      #               "dataschema": "http://dynatrace.com/schema/bizevents/generic/1.0", \
+      #               "data": { \
+      #                   "duration": $timeDiff \
+      #               } \
+      #             }"
       
       # - name: Calculate Duration
       #   run: "let \"timeDiff = $endTime - $startTime\" && export timeDiff"
