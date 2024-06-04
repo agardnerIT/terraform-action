@@ -30,7 +30,10 @@ jobs:
           DYNATRACE_API_TOKEN: ${{ secrets.DYNATRACE_API_TOKEN }}
           DYNATRACE_AUTOMATION_CLIENT_ID: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_ID }}
           DYNATRACE_AUTOMATION_CLIENT_SECRET: ${{ secrets.DYNATRACE_AUTOMATION_CLIENT_SECRET }}
-        run: "./terraform-provider-dynatrace -export ${{env.DT_CONFIG_TYPES}}"
+        run: "./terraform-provider-dynatrace -skip-terraform-init -export ${{env.DT_CONFIG_TYPES}}"
 
       - name: "List files and folders"
         run: "ls -al"
+      
+      - name: "Commit files to repo"
+        run: "git add configuration/* && git commit -m 'update backup' && git push"
