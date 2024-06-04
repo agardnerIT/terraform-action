@@ -44,7 +44,7 @@ jobs:
 
  # WORKING       
       - name: "Bulk Export"
-        if: env.DO_STANDARD_EXPORT == "yes"
+        if: env.DO_STANDARD_EXPORT == 'yes'
         run: "./terraform-provider-dynatrace -export -skip-terraform-init=True"
 
 # WORKING
