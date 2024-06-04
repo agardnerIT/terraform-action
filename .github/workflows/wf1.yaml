@@ -6,6 +6,7 @@ env:
 
 jobs:
   Export-Configuration:
+    environment: DUMMY
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
