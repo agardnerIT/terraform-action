@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 # WORKING    
-      - name: "Note start time"
-        run: >
-            startTime=$(date +%s) &&
-            echo "GHA_START_TIME=$startTime" >> "$GITHUB_ENV"
+      # - name: "Note start time"
+      #   run: >
+      #       startTime=$(date +%s) &&
+      #       echo "GHA_START_TIME=$startTime" >> "$GITHUB_ENV"
 
 # WORKING
       # - name: Check out repository code
@@ -66,13 +66,16 @@ jobs:
       - name: "Generate times and event UUID"
         run: >
             endTime=$(date +%s) &&
-            echo "GHA_END_TIME=$endTime" >> "$GITHUB_ENV"
+            startTime=$(($endTime - 4)) &&
+            echo "GHA_START_TIME=$startTime" >> "$GITHUB_ENV" &&
+            echo "GHA_END_TIME=$endTime" >> "$GITHUB_ENV" &&
             timeDiff=$(($GHA_END_TIME - $GHA_START_TIME)) &&
-            echo "GHA_TIME_DIFF=$timeDiff"
-      #       eventUUID=$(uuidgen)
+            echo "GHA_TIME_DIFF=$timeDiff" &&
+            eventUUID=$(uuidgen)
 
       - name: "Send bizevent"
         run: >
+            eventUUID=$(uuidgen) &&
             curl -X POST "${{ secrets.DYNATRACE_ENV_URL }}/api/v2/bizevents/ingest" \
               -H "accept: application/json; charset=utf-8" \
               -H "Authorization: Api-Token ${{ secrets.DT_BUSINESS_EVENT_TOKEN }}" \
