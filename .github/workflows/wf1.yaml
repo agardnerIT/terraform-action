@@ -50,7 +50,7 @@ jobs:
       
       - name: "Generate times and event UUID"
         run: >
-            endTime=$(date +%s)
+            endTime=$(date +%s) &&
             timeDiff=$(($endTime - $startTime)) &&
             eventUUID=$(uuidgen)
 
